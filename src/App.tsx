@@ -41,6 +41,7 @@ function App() {
     })
   }
   
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let logout = () => {
     netlifyAuth.signout(() => {
       setLoggedIn(false)
@@ -50,7 +51,7 @@ function App() {
 
   return (
     <div className="App bg-gray-100 pt-6 pb-16">
-      <p>{loggedIn ? "you are logged in!" : "You are not :("}</p>
+      <p>{loggedIn ? `You're signed in as: ${user?.email}` : ""}</p>
         <h1 className="text-6xl font-extrabold">Vehikl Lightning Talks</h1>
         <div className="text-6xl mt-4">⚡</div>
       <section className="mt-4">
