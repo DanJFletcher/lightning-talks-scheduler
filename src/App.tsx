@@ -1,5 +1,7 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import netlifyAuth from './netlifyAuth';
 import './App.css';
+import netlifyIdentity from 'netlify-identity-widget'
 
 const talks = [
   {
@@ -23,8 +25,32 @@ const talks = [
 ]
 
 function App() {
+  const [user, setUser] = useState<netlifyIdentity.User | null>(null)
+  const [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated)
+
+  useEffect(() => {
+    netlifyAuth.initialize((user: netlifyIdentity.User) => {
+      setLoggedIn(!!user)
+    })
+  }, [loggedIn])
+
+  let login = () => {
+    netlifyAuth.authenticate((user: netlifyIdentity.User) => {
+      setLoggedIn(!!user)
+      setUser(user)
+    })
+  }
+  
+  let logout = () => {
+    netlifyAuth.signout(() => {
+      setLoggedIn(false)
+      setUser(null)
+    })
+  }
+
   return (
     <div className="App bg-gray-100 pt-6 pb-16">
+      <p>{loggedIn ? "you are logged in!" : "You are not :("}</p>
         <h1 className="text-6xl font-extrabold">Vehikl Lightning Talks</h1>
         <div className="text-6xl mt-4">⚡</div>
       <section className="mt-4">
@@ -49,6 +75,8 @@ function App() {
       <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
             <div className="py-8 px-8 rounded-xl">
                 <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
+                {loggedIn ? (
+
                 <form action="" className="mt-6 text-left">
 
                     {/* Date */}
@@ -80,6 +108,12 @@ function App() {
 
                     <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">Submit</button>
                 </form>
+                ) : (
+                    <button 
+                      className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
+                      onClick={login}
+                    >Login</button>
+                )}
             </div>
         </div>
       </section>
