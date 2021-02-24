@@ -25,6 +25,7 @@ const netlifyAuth = {
     netlifyIdentity.on('logout', () => {
       this.user = null
       callback()
+      netlifyIdentity.close()
     })
   },
 }

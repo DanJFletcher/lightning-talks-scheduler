@@ -31,8 +31,9 @@ function App() {
   useEffect(() => {
     netlifyAuth.initialize((user: netlifyIdentity.User) => {
       setLoggedIn(!!user)
+      setUser(user)
     })
-  }, [loggedIn])
+  }, [])
 
   let login = () => {
     netlifyAuth.authenticate((user: netlifyIdentity.User) => {
@@ -51,7 +52,15 @@ function App() {
 
   return (
     <div className="App bg-gray-100 pt-6 pb-16">
-      <p>{loggedIn ? `You're signed in as: ${user?.email}` : ""}</p>
+      { loggedIn ? (
+        <>
+        <p>You're logged in as {user?.user_metadata?.full_name}</p>
+        <p 
+          className="underline cursor-pointer text-blue-500"
+          onClick={logout}
+        >Sign out</p>
+        </>
+      ) : null} 
         <h1 className="text-6xl font-extrabold">Vehikl Lightning Talks</h1>
         <div className="text-6xl mt-4">⚡</div>
       <section className="mt-4">
