@@ -27,6 +27,7 @@ const talks = [
 function App() {
   const [user, setUser] = useState<netlifyIdentity.User | null>(null)
   const [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated)
+  const [formData, setFormData] = useState({})
 
   useEffect(() => {
     netlifyAuth.initialize((user: netlifyIdentity.User) => {
@@ -35,7 +36,7 @@ function App() {
     })
   }, [])
 
-  let login = () => {
+  const login = () => {
     netlifyAuth.authenticate((user: netlifyIdentity.User) => {
       setLoggedIn(!!user)
       setUser(user)
@@ -43,10 +44,22 @@ function App() {
   }
   
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let logout = () => {
+  const logout = () => {
     netlifyAuth.signout(() => {
       setLoggedIn(false)
       setUser(null)
+    })
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    console.log('hey')
+    event.preventDefault()
+    fetch('.netlify/functions/create-talk', {
+      method: 'POST',
+      body: JSON.stringify({
+        user,
+        formData
+      })
     })
   }
 
@@ -87,12 +100,16 @@ function App() {
                 <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
                 {loggedIn ? (
 
-                <form action="" className="mt-6 text-left">
+                <form onSubmit={handleSubmit} className="mt-6 text-left">
 
                     {/* Date */}
                     <div className="my-5 text-sm">
                         <label htmlFor="date" className="block text-black">Date</label>
-                        <select id="date" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full">
+                        <select 
+                          id="date" 
+                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                          onChange={(e) => setFormData({...formData, ...{date: e.target.value}})}
+                        >
                           <option>Feb 26th 2021</option>
                           <option>March 26th 2021</option>
                         </select>
@@ -101,22 +118,37 @@ function App() {
                     {/* name */}
                     <div className="my-5 text-sm">
                         <label htmlFor="name" className="block text-black">Name</label>
-                        <input type="text" id="name" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your name?" />
+                        <input 
+                          type="text" 
+                          id="name" 
+                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" 
+                          placeholder="What is your name?" 
+                          onChange={(e) => setFormData({...formData, ...{speaker: e.target.value}})}
+                        />
                     </div>
 
                     {/* title */}
                     <div className="my-5 text-sm">
                         <label htmlFor="title" className="block text-black">Title</label>
-                        <input type="text" id="title" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your talk about?" />
+                        <input type="text" id="title" 
+                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your talk about?" 
+                          onChange={(e) => setFormData({...formData, ...{title: e.target.value}})}
+                        />
                     </div>
 
                     {/* length */}
                     <div className="my-5 text-sm">
                         <label htmlFor="length" className="block text-black">Length</label>
-                        <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?" />
+                        <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?" 
+                          onChange={(e) => setFormData({...formData, ...{length: e.target.value}})}
+                        />
+
                     </div>
 
-                    <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">Submit</button>
+                    <button 
+                      className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
+                      type="submit"
+                    >Submit</button>
                 </form>
                 ) : (
                     <button 
