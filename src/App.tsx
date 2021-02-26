@@ -5,22 +5,46 @@ import netlifyIdentity from 'netlify-identity-widget'
 
 const talks = [
   {
-    speaker: 'Colin Decarlo',
-    title: 'How to deliver a tech talk',
+    speaker: 'Andrew Noble',
+    title: `You won't believe this one simple trick to increase your unix productivity (sysadmins HATE it)`,
     start: '3:30',
     end: '3:45'
   },
   {
-    speaker: 'Deep Panchel',
-    title: 'Hasura backends',
+    speaker: 'Justin Struk',
+    title: 'MobTime plugin for PHPStorm',
     start: '3:45',
-    end: '4:00'
+    end: '3:55'
   },
   {
-    speaker: 'Andrew Nobel',
-    title: `You won't believe this one simple trick to increase your unix productivity (sysadmins HATE it)`,
-    start: '4:00',
-    end: '4:15'
+    speaker: 'Andrii Denysenko',
+    title: `Firebase Analytics`,
+    start: '3:55',
+    end: '4:10'
+  },
+  {
+    speaker: 'Felipe Flor',
+    title: `Processing Images in Node`,
+    start: '4:10',
+    end: '4:20'
+  },
+  {
+    speaker: 'Deep Panchel',
+    title: `Free* Backend by Hasura`,
+    start: '4:20',
+    end: '4:40'
+  },
+  {
+    speaker: 'Attila Komaromi',
+    title: `Using TensorFlow.js in React to Categorize Images`,
+    start: '4:35',
+    end: '4:40'
+  },
+  {
+    speaker: 'Dan Fletcher',
+    title: `Netlify Functions`,
+    start: '4:40',
+    end: '4:55'
   }
 ]
 
