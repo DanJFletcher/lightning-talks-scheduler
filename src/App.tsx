@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import netlifyAuth from './netlifyAuth';
 import './App.css';
 import netlifyIdentity from 'netlify-identity-widget'
@@ -8,6 +8,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Admin from './pages/Admin';
 
 const talks = [
   {
@@ -99,7 +100,7 @@ function App() {
 
       <Switch>
         {user && user.app_metadata.roles.find(x => x === 'admin') ? (<Route path="/admin">
-          <p>Admin</p>
+          <Admin />
         </Route>) : null }
         <Route path="/">
           <div className="App bg-gray-100 pt-6 pb-16">
@@ -112,7 +113,7 @@ function App() {
                 >Sign out</p>
                 {user && user.app_metadata.roles.find(x => x === 'admin') ? (
                   <Link to="/admin"
-                    className="underline cursor-pointer text-blue-500"
+                    className="underline cursor-pointer text-blue-500 m-6 block"
                   >Admin</Link>
                 ) : null}
               </>
