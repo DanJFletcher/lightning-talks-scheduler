@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import netlifyAuth from './netlifyAuth';
 import './App.css';
 import netlifyIdentity from 'netlify-identity-widget'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Admin from './pages/Admin';
 
 const talks = [
   {
@@ -57,6 +64,7 @@ function App() {
     netlifyAuth.initialize((user: netlifyIdentity.User) => {
       setLoggedIn(!!user)
       setUser(user)
+      console.log(user)
     })
   }, [])
 
@@ -66,7 +74,7 @@ function App() {
       setUser(user)
     })
   }
-  
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const logout = () => {
     netlifyAuth.signout(() => {
@@ -88,103 +96,119 @@ function App() {
   }
 
   return (
-    <div className="App bg-gray-100 pt-6 pb-16">
-      { loggedIn ? (
-        <>
-        <p>You're logged in as {user?.user_metadata?.full_name}</p>
-        <p 
-          className="underline cursor-pointer text-blue-500"
-          onClick={logout}
-        >Sign out</p>
-        </>
-      ) : null} 
-        <h1 className="text-6xl font-extrabold">Vehikl Lightning Talks</h1>
-        <div className="text-6xl mt-4">⚡</div>
-      <section className="mt-4">
-        <h2 className="text-4xl mt-14">Next Event</h2>
-        <p className="text-5xl mt-4">Friday Feb 26th, 2021</p>
+    <Router>
 
-        <h3 className="text-2xl mt-6">Scheduled Talks</h3>
+      <Switch>
+        {user && user.app_metadata.roles.find(x => x === 'admin') ? (<Route path="/admin">
+          <Admin />
+        </Route>) : null }
+        <Route path="/">
+          <div className="App bg-gray-100 pt-6 pb-16">
+            {loggedIn ? (
+              <>
+                <p>You're logged in as {user?.user_metadata?.full_name}</p>
+                <p
+                  className="underline cursor-pointer text-blue-500"
+                  onClick={logout}
+                >Sign out</p>
+                {user && user.app_metadata.roles.find(x => x === 'admin') ? (
+                  <Link to="/admin"
+                    className="underline cursor-pointer text-blue-500 m-6 block"
+                  >Admin</Link>
+                ) : null}
+              </>
+            ) : null}
+            <h1 className="text-6xl font-extrabold">Vehikl Lightning Talks</h1>
+            <div className="text-6xl mt-4">⚡</div>
+            <section className="mt-4">
+              <h2 className="text-4xl mt-14">Next Event</h2>
+              <p className="text-5xl mt-4">Friday Feb 26th, 2021</p>
 
-        <div className="flex justify-center mt-6 flex-wrap">
-          {talks.map(talk => (
-          <div className="bg-white m-2 p-4 shadow-md w-44">
-            <div className="mt-4 mb-4 font-bold">{ talk.start } - { talk.end }</div>
-            <h4 className="text-2xl mb-4">{ talk.speaker }</h4>
-            <div className="">{ talk.title }</div>
-          </div>
-          ))}
+              <h3 className="text-2xl mt-6">Scheduled Talks</h3>
 
-        </div>
-      </section>
+              <div className="flex justify-center mt-6 flex-wrap">
+                {talks.map(talk => (
+                  <div className="bg-white m-2 p-4 shadow-md w-44">
+                    <div className="mt-4 mb-4 font-bold">{talk.start} - {talk.end}</div>
+                    <h4 className="text-2xl mb-4">{talk.speaker}</h4>
+                    <div className="">{talk.title}</div>
+                  </div>
+                ))}
 
-      <section className="mt-16">
-      <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
-            <div className="py-8 px-8 rounded-xl">
-                <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
-                {loggedIn ? (
+              </div>
+            </section>
 
-                <form onSubmit={handleSubmit} className="mt-6 text-left">
+            <section className="mt-16">
+              <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
+                <div className="py-8 px-8 rounded-xl">
+                  <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
+                  {loggedIn ? (
 
-                    {/* Date */}
-                    <div className="my-5 text-sm">
+                    <form onSubmit={handleSubmit} className="mt-6 text-left">
+
+                      {/* Date */}
+                      <div className="my-5 text-sm">
                         <label htmlFor="date" className="block text-black">Date</label>
-                        <select 
-                          id="date" 
+                        <select
+                          id="date"
                           className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
-                          onChange={(e) => setFormData({...formData, ...{date: e.target.value}})}
+                          onChange={(e) => setFormData({ ...formData, ...{ date: e.target.value } })}
                         >
                           <option>Feb 26th 2021</option>
                           <option>March 26th 2021</option>
                         </select>
-                    </div>
+                      </div>
 
-                    {/* name */}
-                    <div className="my-5 text-sm">
+                      {/* name */}
+                      <div className="my-5 text-sm">
                         <label htmlFor="name" className="block text-black">Name</label>
-                        <input 
-                          type="text" 
-                          id="name" 
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" 
-                          placeholder="What is your name?" 
-                          onChange={(e) => setFormData({...formData, ...{speaker: e.target.value}})}
+                        <input
+                          type="text"
+                          id="name"
+                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                          placeholder="What is your name?"
+                          onChange={(e) => setFormData({ ...formData, ...{ speaker: e.target.value } })}
                         />
-                    </div>
+                      </div>
 
-                    {/* title */}
-                    <div className="my-5 text-sm">
+                      {/* title */}
+                      <div className="my-5 text-sm">
                         <label htmlFor="title" className="block text-black">Title</label>
-                        <input type="text" id="title" 
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your talk about?" 
-                          onChange={(e) => setFormData({...formData, ...{title: e.target.value}})}
+                        <input type="text" id="title"
+                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your talk about?"
+                          onChange={(e) => setFormData({ ...formData, ...{ title: e.target.value } })}
                         />
-                    </div>
+                      </div>
 
-                    {/* length */}
-                    <div className="my-5 text-sm">
+                      {/* length */}
+                      <div className="my-5 text-sm">
                         <label htmlFor="length" className="block text-black">Length</label>
-                        <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?" 
-                          onChange={(e) => setFormData({...formData, ...{length: e.target.value}})}
+                        <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?"
+                          onChange={(e) => setFormData({ ...formData, ...{ length: e.target.value } })}
                         />
 
-                    </div>
+                      </div>
 
-                    <button 
-                      className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
-                      type="submit"
-                    >Submit</button>
-                </form>
-                ) : (
-                    <button 
-                      className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
-                      onClick={login}
-                    >Login</button>
-                )}
-            </div>
-        </div>
-      </section>
+                      <button
+                        className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
+                        type="submit"
+                      >Submit</button>
+                    </form>
+                  ) : (
+                      <button
+                        className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
+                        onClick={login}
+                      >Login</button>
+                    )}
+                </div>
+              </div>
+            </section>
 
-    </div>
+          </div>
+        </Route>
+
+      </Switch>
+    </Router>
   );
 }
 
