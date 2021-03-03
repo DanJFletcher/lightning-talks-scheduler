@@ -104,7 +104,6 @@ function App() {
 
   return (
     <Router>
-
       <Switch>
         {user && user.app_metadata.roles.find(x => x === 'admin') ? (<Route path="/admin">
           <Admin />
@@ -153,7 +152,6 @@ function App() {
 
             <section className="mt-16" id="submit-talk">
               <Form title="Submit a Talk" handleSubmit={handleSubmit}>
-
                   {loggedIn ? (
                     <>
                       <Select labelName="Date" labelId="date" options={['Feb 26th 2021', 'March 26th 2021']} handleChange={(e) => handleFormUpdate('data', e.target.value)}/>
@@ -173,10 +171,8 @@ function App() {
               <p>Created with ❤ at <a href="//vehikl.com" className="underline">Vehikl</a></p>
               <p>Data vector created by stories - <a href='https://www.freepik.com/vectors/data' className="underline">www.freepik.com</a></p>
             </footer>
-
           </div>
         </Route>
-
       </Switch>
     </Router>
   );
