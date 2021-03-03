@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-interface Talk {
+export interface Talk {
     speaker: string
     title: string
     start: string
