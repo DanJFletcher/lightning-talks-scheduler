@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Admin, { Talk } from './pages/Admin';
 import NoDataImage from './images/no-data-illistration.jpg'
+import Form from './components/forms/Form';
 
 const talks: Talk[] = [
   // {
@@ -135,10 +136,10 @@ function App() {
                     <div className="">{talk.title}</div>
                   </div>
                 )) : 
-                  <div className="h-96 w-full bg-white justify-center flex flex-wrap p-6 box-content overflow-hidden">
+                  <div className="w-full bg-white justify-center flex flex-wrap p-6 box-content overflow-hidden">
                     <h4 className="text-2xl w-full">No Talks Have Been Scheduled For This Event!</h4>
                     <a className="w-full mt-4 underline" href="#submit-talk">Why not submit one?</a>
-                    <img src={NoDataImage} alt="No data found" className="h-full" />
+                    <img src={NoDataImage} alt="No data found" className="h-96 mb-6" />
                   </div>
                 }
 
@@ -146,14 +147,10 @@ function App() {
             </section>
 
             <section className="mt-16" id="submit-talk">
-              <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
-                <div className="py-8 px-8 rounded-xl">
-                  <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
+              <Form title="Submit a Talk" handleSubmit={handleSubmit}>
+
                   {loggedIn ? (
-
-                    <form onSubmit={handleSubmit} className="mt-6 text-left">
-
-                      {/* Date */}
+                    <>
                       <div className="my-5 text-sm">
                         <label htmlFor="date" className="block text-black">Date</label>
                         <select
@@ -166,7 +163,6 @@ function App() {
                         </select>
                       </div>
 
-                      {/* name */}
                       <div className="my-5 text-sm">
                         <label htmlFor="name" className="block text-black">Name</label>
                         <input
@@ -178,7 +174,6 @@ function App() {
                         />
                       </div>
 
-                      {/* title */}
                       <div className="my-5 text-sm">
                         <label htmlFor="title" className="block text-black">Title</label>
                         <input type="text" id="title"
@@ -187,7 +182,6 @@ function App() {
                         />
                       </div>
 
-                      {/* length */}
                       <div className="my-5 text-sm">
                         <label htmlFor="length" className="block text-black">Length</label>
                         <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?"
@@ -200,18 +194,17 @@ function App() {
                         className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
                         type="submit"
                       >Submit</button>
-                    </form>
+                      </>
                   ) : (
-                      <button
-                        className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
-                        onClick={login}
-                      >Login</button>
-                    )}
-                </div>
-              </div>
-            </section>
+                        <button
+                          className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
+                          onClick={login}
+                        >Login</button>
+                      )}
+                  </Form>
+                  </section>
 
-            <footer className="bg-white w-full py-8">
+            <footer className="bg-white w-full py-8 px-4">
               <p>Created with ❤ at <a href="//vehikl.com" className="underline">Vehikl</a></p>
               <p>Data vector created by stories - <a href='https://www.freepik.com/vectors/data' className="underline">www.freepik.com</a></p>
             </footer>
