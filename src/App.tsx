@@ -13,6 +13,7 @@ import NoDataImage from './images/no-data-illistration.jpg'
 import Form from './components/forms/Form';
 import Select from './components/forms/Select';
 import TextInput from './components/forms/TextInput';
+import Button from './components/forms/Button';
 
 const talks: Talk[] = [
   // {
@@ -160,16 +161,10 @@ function App() {
                       <TextInput labelName="Title" labelId="title" placeholderText="What is your talk about?" handleChange={(e) => handleFormUpdate('title', e.target.value)} />
                       <TextInput labelName="Length" labelId="length" placeholderText="How long is your talk?" handleChange={(e) => handleFormUpdate('length', e.target.value)} />
 
-                      <button
-                        className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
-                        type="submit"
-                      >Submit</button>
-                      </>
+                      <Button type="submit" buttonText="Submit" />
+                    </>
                   ) : (
-                    <button
-                      className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
-                      onClick={login}
-                    >Login</button>
+                    <Button type="button" buttonText="Login" handleClick={login} />
                   )}
               </Form>
             </section>
