@@ -12,6 +12,7 @@ import Admin, { Talk } from './pages/Admin';
 import NoDataImage from './images/no-data-illistration.jpg'
 import Form from './components/forms/Form';
 import Select from './components/forms/Select';
+import TextInput from './components/forms/TextInput';
 
 const talks: Talk[] = [
   // {
@@ -153,17 +154,7 @@ function App() {
                   {loggedIn ? (
                     <>
                       <Select labelName="Date" labelId="date" options={['Feb 26th 2021', 'March 26th 2021']} handleChange={(e) => setFormData({ ...formData, ...{ date: e.target.value } })}/>
-
-                      <div className="my-5 text-sm">
-                        <label htmlFor="name" className="block text-black">Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
-                          placeholder="What is your name?"
-                          onChange={(e) => setFormData({ ...formData, ...{ speaker: e.target.value } })}
-                        />
-                      </div>
+                      <TextInput labelName="Name" labelId="name" placeholderText="What is your name?" handleChange={(e) => setFormData({ ...formData, ...{ speaker: e.target.value } })} />
 
                       <div className="my-5 text-sm">
                         <label htmlFor="title" className="block text-black">Title</label>
