@@ -99,6 +99,8 @@ function App() {
     })
   }
 
+  const handleFormUpdate = (key: string, value: string) => setFormData({...formData, [key]: value})
+
   return (
     <Router>
 
@@ -153,10 +155,10 @@ function App() {
 
                   {loggedIn ? (
                     <>
-                      <Select labelName="Date" labelId="date" options={['Feb 26th 2021', 'March 26th 2021']} handleChange={(e) => setFormData({ ...formData, ...{ date: e.target.value } })}/>
-                      <TextInput labelName="Name" labelId="name" placeholderText="What is your name?" handleChange={(e) => setFormData({ ...formData, ...{ speaker: e.target.value } })} />
-                      <TextInput labelName="Title" labelId="title" placeholderText="What is your talk about?" handleChange={(e) => setFormData({ ...formData, ...{ title: e.target.value } })} />
-                      <TextInput labelName="Length" labelId="length" placeholderText="How long is your talk?" handleChange={(e) => setFormData({ ...formData, ...{ length: e.target.value } })} />
+                      <Select labelName="Date" labelId="date" options={['Feb 26th 2021', 'March 26th 2021']} handleChange={(e) => handleFormUpdate('data', e.target.value)}/>
+                      <TextInput labelName="Name" labelId="name" placeholderText="What is your name?" handleChange={(e) => handleFormUpdate('speaker', e.target.value)} />
+                      <TextInput labelName="Title" labelId="title" placeholderText="What is your talk about?" handleChange={(e) => handleFormUpdate('title', e.target.value)} />
+                      <TextInput labelName="Length" labelId="length" placeholderText="How long is your talk?" handleChange={(e) => handleFormUpdate('length', e.target.value)} />
 
                       <button
                         className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
@@ -164,13 +166,13 @@ function App() {
                       >Submit</button>
                       </>
                   ) : (
-                        <button
-                          className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
-                          onClick={login}
-                        >Login</button>
-                      )}
-                  </Form>
-                  </section>
+                    <button
+                      className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
+                      onClick={login}
+                    >Login</button>
+                  )}
+              </Form>
+            </section>
 
             <footer className="bg-white w-full py-8 px-4">
               <p>Created with ❤ at <a href="//vehikl.com" className="underline">Vehikl</a></p>
