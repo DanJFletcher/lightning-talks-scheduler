@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import Form from '../components/forms/Form'
+import Select from '../components/forms/Select'
+import TextInput from '../components/forms/TextInput'
 
 export interface Talk {
     speaker: string
@@ -21,7 +24,18 @@ const Admin: React.FC = (props) => {
     }, [])
     return (
         <>
-            <p>Admin</p>
+            <h1 className="text-4xl">Admin</h1>
+            <Form handleSubmit={(e) => null} title="Add Event">
+                <div className="my-5 text-sm">
+                    <label htmlFor="date" className="block text-black">Date</label>
+                    <input 
+                        type="date" 
+                        id="date" 
+                        name="date"
+                        className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    />
+                </div>
+            </Form>
             <div className="flex justify-center mt-6 flex-wrap">
                 {talks.map(talk => (
                   <div className="bg-white m-2 p-4 shadow-md w-44">
