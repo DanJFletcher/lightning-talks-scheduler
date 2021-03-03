@@ -56,7 +56,9 @@ const talks: Talk[] = [
   //   speaker: 'Dan Fletcher',
   //   title: `Netlify Functions`,
   //   start: '4:40',
-  //   end: '4:55'
+  //   end: '4:55',
+  //   scheduled: true,
+  //   event: 1
   // }
 ]
 
@@ -150,7 +152,7 @@ function App() {
               </div>
             </section>
 
-            <section className="mt-16" id="submit-talk">
+            <section className="mt-28 mb-28" id="submit-talk">
               <Form title="Submit a Talk" handleSubmit={handleSubmit}>
                   {loggedIn ? (
                     <>
