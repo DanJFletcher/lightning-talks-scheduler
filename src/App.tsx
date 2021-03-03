@@ -155,22 +155,8 @@ function App() {
                     <>
                       <Select labelName="Date" labelId="date" options={['Feb 26th 2021', 'March 26th 2021']} handleChange={(e) => setFormData({ ...formData, ...{ date: e.target.value } })}/>
                       <TextInput labelName="Name" labelId="name" placeholderText="What is your name?" handleChange={(e) => setFormData({ ...formData, ...{ speaker: e.target.value } })} />
-
-                      <div className="my-5 text-sm">
-                        <label htmlFor="title" className="block text-black">Title</label>
-                        <input type="text" id="title"
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your talk about?"
-                          onChange={(e) => setFormData({ ...formData, ...{ title: e.target.value } })}
-                        />
-                      </div>
-
-                      <div className="my-5 text-sm">
-                        <label htmlFor="length" className="block text-black">Length</label>
-                        <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?"
-                          onChange={(e) => setFormData({ ...formData, ...{ length: e.target.value } })}
-                        />
-
-                      </div>
+                      <TextInput labelName="Title" labelId="title" placeholderText="What is your talk about?" handleChange={(e) => setFormData({ ...formData, ...{ title: e.target.value } })} />
+                      <TextInput labelName="Length" labelId="length" placeholderText="How long is your talk?" handleChange={(e) => setFormData({ ...formData, ...{ length: e.target.value } })} />
 
                       <button
                         className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
