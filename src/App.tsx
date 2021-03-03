@@ -8,51 +8,52 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Admin from './pages/Admin';
+import Admin, { Talk } from './pages/Admin';
+import NoDataImage from './images/no-data-illistration.jpg'
 
-const talks = [
-  {
-    speaker: 'Andrew Noble',
-    title: `You won't believe this one simple trick to increase your unix productivity (sysadmins HATE it)`,
-    start: '3:30',
-    end: '3:45'
-  },
-  {
-    speaker: 'Justin Struk',
-    title: 'MobTime plugin for PHPStorm',
-    start: '3:45',
-    end: '3:55'
-  },
-  {
-    speaker: 'Andrii Denysenko',
-    title: `Firebase Analytics`,
-    start: '3:55',
-    end: '4:10'
-  },
-  {
-    speaker: 'Felipe Flor',
-    title: `Processing Images in Node`,
-    start: '4:10',
-    end: '4:20'
-  },
-  {
-    speaker: 'Deep Panchel',
-    title: `Free* Backend by Hasura`,
-    start: '4:20',
-    end: '4:40'
-  },
-  {
-    speaker: 'Attila Komaromi',
-    title: `Using TensorFlow.js in React to Categorize Images`,
-    start: '4:35',
-    end: '4:40'
-  },
-  {
-    speaker: 'Dan Fletcher',
-    title: `Netlify Functions`,
-    start: '4:40',
-    end: '4:55'
-  }
+const talks: Talk[] = [
+  // {
+  //   speaker: 'Andrew Noble',
+  //   title: `You won't believe this one simple trick to increase your unix productivity (sysadmins HATE it)`,
+  //   start: '3:30',
+  //   end: '3:45'
+  // },
+  // {
+  //   speaker: 'Justin Struk',
+  //   title: 'MobTime plugin for PHPStorm',
+  //   start: '3:45',
+  //   end: '3:55'
+  // },
+  // {
+  //   speaker: 'Andrii Denysenko',
+  //   title: `Firebase Analytics`,
+  //   start: '3:55',
+  //   end: '4:10'
+  // },
+  // {
+  //   speaker: 'Felipe Flor',
+  //   title: `Processing Images in Node`,
+  //   start: '4:10',
+  //   end: '4:20'
+  // },
+  // {
+  //   speaker: 'Deep Panchel',
+  //   title: `Free* Backend by Hasura`,
+  //   start: '4:20',
+  //   end: '4:40'
+  // },
+  // {
+  //   speaker: 'Attila Komaromi',
+  //   title: `Using TensorFlow.js in React to Categorize Images`,
+  //   start: '4:35',
+  //   end: '4:40'
+  // },
+  // {
+  //   speaker: 'Dan Fletcher',
+  //   title: `Netlify Functions`,
+  //   start: '4:40',
+  //   end: '4:55'
+  // }
 ]
 
 function App() {
@@ -103,7 +104,7 @@ function App() {
           <Admin />
         </Route>) : null }
         <Route path="/">
-          <div className="App bg-gray-100 pt-6 pb-16">
+          <div className="App bg-gray-100 pt-6">
             {loggedIn ? (
               <>
                 <p>You're logged in as {user?.user_metadata?.full_name}</p>
@@ -122,23 +123,29 @@ function App() {
             <div className="text-6xl mt-4">⚡</div>
             <section className="mt-4">
               <h2 className="text-4xl mt-14">Next Event</h2>
-              <p className="text-5xl mt-4">Friday Feb 26th, 2021</p>
+              <p className="text-5xl mt-4">Friday March 26th, 2021</p>
 
               <h3 className="text-2xl mt-6">Scheduled Talks</h3>
 
               <div className="flex justify-center mt-6 flex-wrap">
-                {talks.map(talk => (
+                {talks.length > 0 ? talks.map(talk => (
                   <div className="bg-white m-2 p-4 shadow-md w-44">
                     <div className="mt-4 mb-4 font-bold">{talk.start} - {talk.end}</div>
                     <h4 className="text-2xl mb-4">{talk.speaker}</h4>
                     <div className="">{talk.title}</div>
                   </div>
-                ))}
+                )) : 
+                  <div className="h-96 w-full bg-white justify-center flex flex-wrap p-6 box-content overflow-hidden">
+                    <h4 className="text-2xl w-full">No Talks Have Been Scheduled For This Event!</h4>
+                    <a className="w-full mt-4 underline" href="#submit-talk">Why not submit one?</a>
+                    <img src={NoDataImage} alt="No data found" className="h-full" />
+                  </div>
+                }
 
               </div>
             </section>
 
-            <section className="mt-16">
+            <section className="mt-16" id="submit-talk">
               <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
                 <div className="py-8 px-8 rounded-xl">
                   <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
@@ -203,6 +210,11 @@ function App() {
                 </div>
               </div>
             </section>
+
+            <footer className="bg-white w-full py-8">
+              <p>Created with ❤ at <a href="//vehikl.com" className="underline">Vehikl</a></p>
+              <p>Data vector created by stories - <a href='https://www.freepik.com/vectors/data' className="underline">www.freepik.com</a></p>
+            </footer>
 
           </div>
         </Route>
