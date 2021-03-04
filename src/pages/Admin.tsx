@@ -43,7 +43,7 @@ const Admin: React.FC = (props) => {
                         id="date" 
                         name="date"
                         className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
-                        onChange={(e) => setEventDate(e.target.value)}
+                        onChange={(e) => setEventDate((new Date(e.target.value).toUTCString()))}
                     />
                 </div>
                 <Button type="submit" handleClick={addEvent} buttonText="Add Event"/>
