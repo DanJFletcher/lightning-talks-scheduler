@@ -90,9 +90,8 @@ function App() {
     })
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    console.log('hey')
-    event.preventDefault()
+  const handleSubmit: React.FormEventHandler = (e) => {
+    e.preventDefault()
     fetch('.netlify/functions/create-talk', {
       method: 'POST',
       body: JSON.stringify({
