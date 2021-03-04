@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import Button from '../components/forms/Button'
+import Form from '../components/forms/Form'
 
 export interface Talk {
     speaker: string
@@ -11,6 +13,17 @@ export interface Talk {
 
 const Admin: React.FC = (props) => {
     const [talks, setTalks] = useState<Talk[]>([])
+    const [eventDate, setEventDate] = useState<string|null>(null)
+
+    const addEvent: React.FormEventHandler = (e) => {
+        e.preventDefault()
+        fetch('.netlify/functions/scheduled-events', {
+            method: 'POST',
+            body: JSON.stringify({
+                date: eventDate
+            })
+        })
+    }
 
     useEffect(() => {
         (async () => {
@@ -21,7 +34,20 @@ const Admin: React.FC = (props) => {
     }, [])
     return (
         <>
-            <p>Admin</p>
+            <h1 className="text-4xl">Admin</h1>
+            <Form handleSubmit={(e) => null} title="Add Event">
+                <div className="my-5 text-sm">
+                    <label htmlFor="date" className="block text-black">Date</label>
+                    <input 
+                        type="date" 
+                        id="date" 
+                        name="date"
+                        className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                        onChange={(e) => setEventDate(e.target.value)}
+                    />
+                </div>
+                <Button type="submit" handleClick={addEvent} buttonText="Add Event"/>
+            </Form>
             <div className="flex justify-center mt-6 flex-wrap">
                 {talks.map(talk => (
                   <div className="bg-white m-2 p-4 shadow-md w-44">

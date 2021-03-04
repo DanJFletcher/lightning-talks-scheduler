@@ -10,6 +10,10 @@ import {
 } from "react-router-dom";
 import Admin, { Talk } from './pages/Admin';
 import NoDataImage from './images/no-data-illistration.jpg'
+import Form from './components/forms/Form';
+import Select from './components/forms/Select';
+import TextInput from './components/forms/TextInput';
+import Button from './components/forms/Button';
 
 const talks: Talk[] = [
   // {
@@ -52,7 +56,9 @@ const talks: Talk[] = [
   //   speaker: 'Dan Fletcher',
   //   title: `Netlify Functions`,
   //   start: '4:40',
-  //   end: '4:55'
+  //   end: '4:55',
+  //   scheduled: true,
+  //   event: 1
   // }
 ]
 
@@ -84,9 +90,8 @@ function App() {
     })
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    console.log('hey')
-    event.preventDefault()
+  const handleSubmit: React.FormEventHandler = (e) => {
+    e.preventDefault()
     fetch('.netlify/functions/create-talk', {
       method: 'POST',
       body: JSON.stringify({
@@ -96,9 +101,10 @@ function App() {
     })
   }
 
+  const handleFormUpdate = (key: string, value: string) => setFormData({...formData, [key]: value})
+
   return (
     <Router>
-
       <Switch>
         {user && user.app_metadata.roles.find(x => x === 'admin') ? (<Route path="/admin">
           <Admin />
@@ -135,90 +141,39 @@ function App() {
                     <div className="">{talk.title}</div>
                   </div>
                 )) : 
-                  <div className="h-96 w-full bg-white justify-center flex flex-wrap p-6 box-content overflow-hidden">
+                  <div className="w-full bg-white justify-center flex flex-wrap p-6 box-content overflow-hidden">
                     <h4 className="text-2xl w-full">No Talks Have Been Scheduled For This Event!</h4>
                     <a className="w-full mt-4 underline" href="#submit-talk">Why not submit one?</a>
-                    <img src={NoDataImage} alt="No data found" className="h-full" />
+                    <img src={NoDataImage} alt="No data found" className="h-96 mb-6" />
                   </div>
                 }
 
               </div>
             </section>
 
-            <section className="mt-16" id="submit-talk">
-              <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
-                <div className="py-8 px-8 rounded-xl">
-                  <h1 className="font-medium text-2xl mt-3 text-center">Submit a Talk</h1>
+            <section className="mt-28 mb-28" id="submit-talk">
+              <Form title="Submit a Talk" handleSubmit={handleSubmit}>
                   {loggedIn ? (
+                    <>
+                      <Select labelName="Date" labelId="date" options={['Feb 26th 2021', 'March 26th 2021']} handleChange={(e) => handleFormUpdate('data', e.target.value)}/>
+                      <TextInput labelName="Name" labelId="name" placeholderText="What is your name?" handleChange={(e) => handleFormUpdate('speaker', e.target.value)} />
+                      <TextInput labelName="Title" labelId="title" placeholderText="What is your talk about?" handleChange={(e) => handleFormUpdate('title', e.target.value)} />
+                      <TextInput labelName="Length" labelId="length" placeholderText="How long is your talk?" handleChange={(e) => handleFormUpdate('length', e.target.value)} />
 
-                    <form onSubmit={handleSubmit} className="mt-6 text-left">
-
-                      {/* Date */}
-                      <div className="my-5 text-sm">
-                        <label htmlFor="date" className="block text-black">Date</label>
-                        <select
-                          id="date"
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
-                          onChange={(e) => setFormData({ ...formData, ...{ date: e.target.value } })}
-                        >
-                          <option>Feb 26th 2021</option>
-                          <option>March 26th 2021</option>
-                        </select>
-                      </div>
-
-                      {/* name */}
-                      <div className="my-5 text-sm">
-                        <label htmlFor="name" className="block text-black">Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
-                          placeholder="What is your name?"
-                          onChange={(e) => setFormData({ ...formData, ...{ speaker: e.target.value } })}
-                        />
-                      </div>
-
-                      {/* title */}
-                      <div className="my-5 text-sm">
-                        <label htmlFor="title" className="block text-black">Title</label>
-                        <input type="text" id="title"
-                          className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="What is your talk about?"
-                          onChange={(e) => setFormData({ ...formData, ...{ title: e.target.value } })}
-                        />
-                      </div>
-
-                      {/* length */}
-                      <div className="my-5 text-sm">
-                        <label htmlFor="length" className="block text-black">Length</label>
-                        <input type="text" id="length" className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="How long is your talk?"
-                          onChange={(e) => setFormData({ ...formData, ...{ length: e.target.value } })}
-                        />
-
-                      </div>
-
-                      <button
-                        className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
-                        type="submit"
-                      >Submit</button>
-                    </form>
+                      <Button type="submit" buttonText="Submit" />
+                    </>
                   ) : (
-                      <button
-                        className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full mt-8"
-                        onClick={login}
-                      >Login</button>
-                    )}
-                </div>
-              </div>
+                    <Button type="button" buttonText="Login" handleClick={login} />
+                  )}
+              </Form>
             </section>
 
-            <footer className="bg-white w-full py-8">
+            <footer className="bg-white w-full py-8 px-4">
               <p>Created with ❤ at <a href="//vehikl.com" className="underline">Vehikl</a></p>
               <p>Data vector created by stories - <a href='https://www.freepik.com/vectors/data' className="underline">www.freepik.com</a></p>
             </footer>
-
           </div>
         </Route>
-
       </Switch>
     </Router>
   );
