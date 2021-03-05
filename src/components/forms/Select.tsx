@@ -4,7 +4,7 @@ interface SelectProps {
     labelName: string
     labelId: string
     handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void 
-    options: string[]
+    options: {text: string, id: number}[]
 }
 
 const Select: React.FC<SelectProps> = ({labelId, handleChange, labelName, options}) => {
@@ -16,7 +16,7 @@ const Select: React.FC<SelectProps> = ({labelId, handleChange, labelName, option
           className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
           onChange={handleChange}
         >
-            {options.map(x => <option>{x}</option>)}
+            {options.map(x => <option key={x.id}>{x.text}</option>)}
         </select>
       </div>
     )
