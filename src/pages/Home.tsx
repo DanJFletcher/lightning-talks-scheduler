@@ -55,6 +55,22 @@ const talks: Talk[] = [
     // }
 ]
 
+const getNextScheduledEvent = (dates: ScheduledEvent[]) => {
+    const now = new Date();
+    const MAX_DATE = 8640000000000000;
+    let nextEvent: ScheduledEvent = {date: new Date(MAX_DATE).toString(), id: 0};
+
+    dates.forEach((date) => {
+        const currentDate = new Date(date.date)
+
+        if (currentDate >= now && (currentDate < new Date(nextEvent.date) || currentDate < new Date(nextEvent.date))) {
+            nextEvent = date
+        }
+    })
+
+    return nextEvent
+}
+
 interface HomeProps {
     loggedIn: boolean
     user: netlifyIdentity.User | null
@@ -77,6 +93,20 @@ interface ScheduledEventResponse {
 const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
     const [formData, setFormData] = useState({})
     const [availableDates, setAvailableDates] = useState<ScheduledEvent[]>([])
+    const [isAdmin, setIsAdmin] = useState(false)
+    const [nextScheduledEvent, setNextScheduledEvent] = useState('Fetching next event...')
+
+    useEffect(() => {
+        setIsAdmin(!!user && !!user.app_metadata.roles.find(x => x === 'admin'))
+    }, [user])
+
+    useEffect(() => {
+        if (availableDates.length < 1) {
+            return;
+        }
+
+        setNextScheduledEvent(getNextScheduledEvent(availableDates).date)
+    }, [availableDates])
 
     useEffect(() => {
         (async () => {
@@ -117,7 +147,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
                         className="underline cursor-pointer text-blue-500"
                         onClick={logout}
                     >Sign out</p>
-                    {user && user.app_metadata.roles.find(x => x === 'admin') ? (
+                    {isAdmin ? (
                         <Link to="/admin"
                             className="underline cursor-pointer text-blue-500 m-6 block"
                         >Admin</Link>
@@ -128,7 +158,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
             <div className="text-6xl mt-4">⚡</div>
             <section className="mt-4">
                 <h2 className="text-4xl mt-14">Next Event</h2>
-                <p className="text-5xl mt-4">Friday March 26th, 2021</p>
+                <p className="text-5xl mt-4">{nextScheduledEvent}</p>
 
                 <h3 className="text-2xl mt-6">Scheduled Talks</h3>
 
