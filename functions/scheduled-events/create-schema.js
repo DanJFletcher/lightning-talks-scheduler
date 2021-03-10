@@ -23,12 +23,15 @@ const createFaunaDB = function () {
           name: 'all_items',
           source: query.Collection('items'),
           active: true,
-        }),
+        })
       )
     })
 
     .catch((error) => {
-      if (error.requestResult.statusCode === 400 && error.message === 'instance not unique') {
+      if (
+        error.requestResult.statusCode === 400 &&
+        error.message === 'instance not unique'
+      ) {
         console.log('DB already exists')
       }
       throw error

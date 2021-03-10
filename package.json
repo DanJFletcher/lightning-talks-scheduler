@@ -30,7 +30,11 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": ["prettier"],
+    "rules": {
+      "prettier/prettier": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -49,8 +53,10 @@
     "@types/netlify-identity-widget": "^1.9.1",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9",
+    "eslint-plugin-prettier": "^3.3.1",
     "netlify-cli": "^3.8.5",
     "postcss": "^7",
+    "prettier": "2.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

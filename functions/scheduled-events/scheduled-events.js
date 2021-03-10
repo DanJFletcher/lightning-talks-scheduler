@@ -38,7 +38,8 @@ const handler = async (event, context) => {
       }
       return {
         statusCode: 500,
-        body: 'invalid segments in POST request, must be /.netlify/functions/scheduled-events/123456',
+        body:
+          'invalid segments in POST request, must be /.netlify/functions/scheduled-events/123456',
       }
 
     case 'DELETE':
@@ -50,7 +51,8 @@ const handler = async (event, context) => {
       }
       return {
         statusCode: 500,
-        body: 'invalid segments in DELETE request, must be /.netlify/functions/scheduled-events/123456',
+        body:
+          'invalid segments in DELETE request, must be /.netlify/functions/scheduled-events/123456',
       }
     default:
       return {

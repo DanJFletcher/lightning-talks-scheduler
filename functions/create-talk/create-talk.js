@@ -1,21 +1,23 @@
 const faunadb = require('faunadb')
 const query = faunadb.query
-const client = new faunadb.Client({secret: process.env.FAUNADB_SERVER_SECRET, keepAlive: false})
+const client = new faunadb.Client({
+  secret: process.env.FAUNADB_SERVER_SECRET,
+  keepAlive: false,
+})
 
 const handler = async function (event) {
-  const {user, formData} = JSON.parse(event.body)
+  const { user, formData } = JSON.parse(event.body)
   try {
     await client.query(
-      query.Create(
-        query.Collection('talks'),
-        { data: {
+      query.Create(query.Collection('talks'), {
+        data: {
           email: user.email,
           speaker: formData.speaker,
           title: formData.title,
           date: formData.date,
-          length: formData['length']
-        }}
-      )
+          length: formData['length'],
+        },
+      })
     )
 
     return {
