@@ -103,7 +103,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
   )
 
   useEffect(() => {
-    setIsAdmin(!!user && !!user.app_metadata.roles.find((x) => x === 'admin'))
+    setIsAdmin(!!user && !!user.app_metadata?.roles?.find((x) => x === 'admin'))
   }, [user])
 
   useEffect(() => {
