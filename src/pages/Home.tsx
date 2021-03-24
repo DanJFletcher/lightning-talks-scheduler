@@ -9,50 +9,54 @@ import NoDataImage from '../images/no-data-illistration.jpg'
 import { Talk } from './Admin'
 
 const talks: Talk[] = [
-  // {
-  //   speaker: 'Andrew Noble',
-  //   title: `You won't believe this one simple trick to increase your unix productivity (sysadmins HATE it)`,
-  //   start: '3:30',
-  //   end: '3:45'
-  // },
-  // {
-  //   speaker: 'Justin Struk',
-  //   title: 'MobTime plugin for PHPStorm',
-  //   start: '3:45',
-  //   end: '3:55'
-  // },
-  // {
-  //   speaker: 'Andrii Denysenko',
-  //   title: `Firebase Analytics`,
-  //   start: '3:55',
-  //   end: '4:10'
-  // },
-  // {
-  //   speaker: 'Felipe Flor',
-  //   title: `Processing Images in Node`,
-  //   start: '4:10',
-  //   end: '4:20'
-  // },
-  // {
-  //   speaker: 'Deep Panchel',
-  //   title: `Free* Backend by Hasura`,
-  //   start: '4:20',
-  //   end: '4:40'
-  // },
-  // {
-  //   speaker: 'Attila Komaromi',
-  //   title: `Using TensorFlow.js in React to Categorize Images`,
-  //   start: '4:35',
-  //   end: '4:40'
-  // },
-  // {
-  //   speaker: 'Dan Fletcher',
-  //   title: `Netlify Functions`,
-  //   start: '4:40',
-  //   end: '4:55',
-  //   scheduled: true,
-  //   event: 1
-  // }
+  {
+    speaker: 'Brian Hogg',
+    title: `My journey into home automation with Home Assistant`,
+    start: '3:30',
+    end: '3:45',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Mike King',
+    title: `React Testing: Hoisting Renders To Improve Performance`,
+    start: '3:45',
+    end: '4:00',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Colin DeCarlo',
+    title: `The Difference Between Types and Interfaces in TypeScript`,
+    start: '4:00',
+    end: '4:15',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Alex Berry',
+    title: `Functional Application State Management`,
+    start: '4:15',
+    end: '4:30',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Italo Di Renzo',
+    title: `GiHub CLI`,
+    start: '4:30',
+    end: '4:35',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Tyler Bauman',
+    title: `Up and running with Ionic`,
+    start: '4:35',
+    end: '4:45',
+    event: 0,
+    scheduled: true,
+  },
 ]
 
 const getNextScheduledEvent = (dates: ScheduledEvent[]) => {
