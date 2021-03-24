@@ -34,7 +34,7 @@ const talks: Talk[] = [
     scheduled: true,
   },
   {
-    speaker: 'Alex Berry',
+    speaker: 'Alex Barry',
     title: `Functional Application State Management`,
     start: '4:15',
     end: '4:30',
