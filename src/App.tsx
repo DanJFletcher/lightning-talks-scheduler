@@ -35,7 +35,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        {user && user.app_metadata.roles.find((x) => x === 'admin') ? (
+        {user && user.app_metadata?.roles?.find((x) => x === 'admin') ? (
           <Route path="/admin">
             <Admin />
           </Route>
