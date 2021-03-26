@@ -57,6 +57,14 @@ const talks: Talk[] = [
     event: 0,
     scheduled: true,
   },
+  {
+    speaker: 'Deep Panchal',
+    title: `Life hacks with microservices`,
+    start: '4:45',
+    end: '4:50',
+    event: 0,
+    scheduled: true,
+  },
 ]
 
 const getNextScheduledEvent = (dates: ScheduledEvent[]) => {
