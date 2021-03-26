@@ -9,62 +9,14 @@ import NoDataImage from '../images/no-data-illistration.jpg'
 import { Talk } from './Admin'
 
 const talks: Talk[] = [
-  {
-    speaker: 'Brian Hogg',
-    title: `My journey into home automation with Home Assistant`,
-    start: '3:30',
-    end: '3:45',
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: 'Mike King',
-    title: `React Testing: Hoisting Renders To Improve Performance`,
-    start: '3:45',
-    end: '4:00',
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: 'Colin DeCarlo',
-    title: `The Difference Between Types and Interfaces in TypeScript`,
-    start: '4:00',
-    end: '4:15',
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: 'Alex Barry',
-    title: `Functional Application State Management`,
-    start: '4:15',
-    end: '4:30',
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: 'Italo Di Renzo',
-    title: `GiHub CLI`,
-    start: '4:30',
-    end: '4:35',
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: 'Tyler Bauman',
-    title: `Up and running with Ionic`,
-    start: '4:35',
-    end: '4:45',
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: 'Deep Panchal',
-    title: `Life hacks with microservices`,
-    start: '4:45',
-    end: '4:50',
-    event: 0,
-    scheduled: true,
-  },
+  // {
+  //   speaker: 'Brian Hogg',
+  //   title: `My journey into home automation with Home Assistant`,
+  //   start: '3:30',
+  //   end: '3:45',
+  //   event: 0,
+  //   scheduled: true,
+  // },
 ]
 
 const isToday = (date: Date) => {
