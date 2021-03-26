@@ -67,6 +67,15 @@ const talks: Talk[] = [
   },
 ]
 
+const isToday = (date: Date) => {
+  const today = new Date()
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  )
+}
+
 const getNextScheduledEvent = (dates: ScheduledEvent[]) => {
   const now = new Date()
   const MAX_DATE = 8640000000000000
@@ -74,11 +83,11 @@ const getNextScheduledEvent = (dates: ScheduledEvent[]) => {
 
   dates.forEach((date) => {
     const currentDate = new Date(date.date)
+    console.log(currentDate, currentDate >= now)
 
     if (
-      currentDate >= now &&
-      (currentDate < new Date(nextEvent.date) ||
-        currentDate < new Date(nextEvent.date))
+      (currentDate >= now || isToday(currentDate)) &&
+      currentDate < new Date(nextEvent.date)
     ) {
       nextEvent = date
     }
