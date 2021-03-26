@@ -20,12 +20,13 @@ const talks: Talk[] = [
 ]
 
 const isToday = (date: Date) => {
-  const today = new Date()
-  return (
-    date.getDate() === today.getDate() &&
-    date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear()
-  )
+  return false
+  // const today = new Date()
+  // return (
+  //   date.getDate() === today.getDate() &&
+  //   date.getMonth() === today.getMonth() &&
+  //   date.getFullYear() === today.getFullYear()
+  // )
 }
 
 const getNextScheduledEvent = (dates: ScheduledEvent[]) => {
