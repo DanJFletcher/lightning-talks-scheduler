@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import netlifyAuth from './netlifyAuth'
 import './App.css'
 import netlifyIdentity from 'netlify-identity-widget'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Admin from './pages/Admin'
 import Home from './pages/Home'
+import { login as authLogin } from './modules/auth'
 
 function App() {
   const [user, setUser] = useState<netlifyIdentity.User | null>(null)
@@ -18,13 +19,9 @@ function App() {
   }, [])
 
   const login = () => {
-    netlifyAuth.authenticate((user: netlifyIdentity.User) => {
-      setLoggedIn(!!user)
-      setUser(user)
-    })
+    authLogin(netlifyAuth, setUser, setLoggedIn)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const logout = () => {
     netlifyAuth.signout(() => {
       setLoggedIn(false)
