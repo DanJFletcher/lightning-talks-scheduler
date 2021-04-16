@@ -14,7 +14,9 @@ jobs:
       # and run all Cypress tests
       - name: Environment
         run: CYPRESS_baseurl='localhost:8888'
-      - name: Functions
+      - name: NPM install
+        run: npm ci
+      - name: Run functions server
         run: npm run netlify dev
       - name: Cypress run
         uses: cypress-io/github-action@v2
