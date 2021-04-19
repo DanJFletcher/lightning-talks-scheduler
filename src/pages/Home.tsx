@@ -125,18 +125,27 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
 
   const handleSubmit: React.FormEventHandler = async (e) => {
     e.preventDefault()
-    const response = await fetch('.netlify/functions/create-talk', {
-      method: 'POST',
-      body: JSON.stringify({
-        user,
-        formData,
-      }),
-    })
 
-    if (response.status === 204) {
+    let response: Response | undefined
+    try {
+      response = await fetch('.netlify/functions/create-talk', {
+        method: 'POST',
+        body: JSON.stringify({
+          user,
+          formData,
+        }),
+      })
+    } catch (e) {
+      toast.error(`Something exploded 💥 and now you're SOL ¯\\_(ツ)_/¯`)
+      return
+    }
+
+    if (response?.status === 204) {
       toast('⚡ Thanks for submitting your talk!')
       setFormData(nullFormData)
       window.scrollTo(0, 0)
+    } else {
+      toast.error(`Something exploded 💥 and now you're SOL ¯\\_(ツ)_/¯`)
     }
   }
 
