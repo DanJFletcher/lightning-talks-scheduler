@@ -5,6 +5,7 @@ interface SelectProps {
   labelId: string
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
   options: { text: string; id: number }[]
+  selected: string
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -12,6 +13,7 @@ const Select: React.FC<SelectProps> = ({
   handleChange,
   labelName,
   options,
+  selected,
 }) => {
   return (
     <div className="my-5 text-sm">
@@ -24,7 +26,12 @@ const Select: React.FC<SelectProps> = ({
         onChange={handleChange}
       >
         {options.map((x) => (
-          <option key={x.id}>{x.text}</option>
+          <option
+            key={x.id}
+            selected={!!options.find((x) => x.text === selected)}
+          >
+            {x.text}
+          </option>
         ))}
       </select>
     </div>
