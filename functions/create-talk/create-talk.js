@@ -15,7 +15,7 @@ const handler = async function (event) {
           speaker: formData.speaker,
           title: formData.title,
           date: formData.date,
-          length: formData['length'],
+          time: formData.time,
         },
       })
     )

@@ -7,6 +7,8 @@ import Form from '../components/forms/Form'
 import TextInput from '../components/forms/TextInput'
 import NoDataImage from '../images/no-data-illistration.jpg'
 import { Talk } from './Admin'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const talks: Talk[] = [
   // {
@@ -68,8 +70,22 @@ interface ScheduledEventResponse {
   }
 }
 
+type FormData = {
+  date: string
+  name: string
+  title: string
+  time: string
+}
+
+const nullFormData = {
+  date: '',
+  name: '',
+  title: '',
+  time: '',
+}
+
 const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState<FormData>(nullFormData)
   const [availableDates, setAvailableDates] = useState<ScheduledEvent[]>([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [nextScheduledEvent, setNextScheduledEvent] = useState(
@@ -107,15 +123,30 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
     })()
   }, [])
 
-  const handleSubmit: React.FormEventHandler = (e) => {
+  const handleSubmit: React.FormEventHandler = async (e) => {
     e.preventDefault()
-    fetch('.netlify/functions/create-talk', {
-      method: 'POST',
-      body: JSON.stringify({
-        user,
-        formData,
-      }),
-    })
+
+    let response: Response | undefined
+    try {
+      response = await fetch('.netlify/functions/create-talk', {
+        method: 'POST',
+        body: JSON.stringify({
+          user,
+          formData,
+        }),
+      })
+    } catch (e) {
+      toast.error(`Something exploded 💥 and now you're SOL ¯\\_(ツ)_/¯`)
+      return
+    }
+
+    if (response?.status === 204) {
+      toast('⚡ Thanks for submitting your talk!')
+      setFormData(nullFormData)
+      window.scrollTo(0, 0)
+    } else {
+      toast.error(`Something exploded 💥 and now you're SOL ¯\\_(ツ)_/¯`)
+    }
   }
 
   const handleFormUpdate = (key: string, value: string) =>
@@ -187,27 +218,29 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
                 labelName="Date"
                 labelId="date"
                 options={availableDates.map((x) => ({ ...x, text: x.date }))}
-                handleChange={(e) => handleFormUpdate('data', e.target.value)}
+                selected={formData.date}
+                handleChange={(e) => handleFormUpdate('date', e.target.value)}
               />
               <TextInput
                 labelName="Name"
                 labelId="name"
                 placeholderText="What is your name?"
-                handleChange={(e) =>
-                  handleFormUpdate('speaker', e.target.value)
-                }
+                handleChange={(e) => handleFormUpdate('name', e.target.value)}
+                value={formData.name}
               />
               <TextInput
                 labelName="Title"
                 labelId="title"
                 placeholderText="What is your talk about?"
                 handleChange={(e) => handleFormUpdate('title', e.target.value)}
+                value={formData.title}
               />
               <TextInput
                 labelName="Length"
                 labelId="length"
                 placeholderText="How long is your talk?"
-                handleChange={(e) => handleFormUpdate('length', e.target.value)}
+                handleChange={(e) => handleFormUpdate('time', e.target.value)}
+                value={formData.time}
               />
 
               <Button type="submit" buttonText="Submit" />
@@ -232,6 +265,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
           </a>
         </p>
       </footer>
+      <ToastContainer />
     </div>
   )
 }
