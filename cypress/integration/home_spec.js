@@ -1,4 +1,10 @@
 describe('Home Page', () => {
+  before(() => {
+    cy.intercept('.netlify/functions/scheduled-events', {
+      fixture: 'get_scheduled_events_response_200.json',
+    })
+  })
+
   it('renders the page', () => {
     cy.visit('/')
   })

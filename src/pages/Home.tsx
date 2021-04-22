@@ -126,7 +126,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
   const handleSubmit: React.FormEventHandler = async (e) => {
     e.preventDefault()
 
-    let response: Response | undefined
+    let response: Response
     try {
       response = await fetch('.netlify/functions/create-talk', {
         method: 'POST',
@@ -140,7 +140,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
       return
     }
 
-    if (response?.status === 204) {
+    if (response.status === 204) {
       toast('⚡ Thanks for submitting your talk!')
       setFormData(nullFormData)
       window.scrollTo(0, 0)
