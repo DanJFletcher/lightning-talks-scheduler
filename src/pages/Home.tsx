@@ -11,14 +11,62 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const talks: Talk[] = [
-  // {
-  //   speaker: 'Brian Hogg',
-  //   title: `My journey into home automation with Home Assistant`,
-  //   start: '3:30',
-  //   end: '3:45',
-  //   event: 0,
-  //   scheduled: true,
-  // },
+  {
+    speaker: 'Andrii Denysenko',
+    title: `Flutter?`,
+    start: '3:35',
+    end: '3:50',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Adam Frank',
+    title: `Testing product variant sets in Cypress`,
+    start: '3:50',
+    end: '4:00',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Andrew Noble',
+    title: `How to Google.`,
+    start: '4:05',
+    end: '4:15',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Alex Barry',
+    title: `New Mobtime`,
+    start: '4:15',
+    end: '4:20',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Deep Panchal',
+    title: `Dockerize development environment`,
+    start: '4:20',
+    end: '4:30',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'Lucas Gladding',
+    title: `API loading hooks and components in React`,
+    start: '4:30',
+    end: '4:40',
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: 'John Ith',
+    title: `About Discord Bots`,
+    start: '4:40',
+    end: '4:45',
+    event: 0,
+    scheduled: true,
+  },
 ]
 
 const isToday = (date: Date) => {
