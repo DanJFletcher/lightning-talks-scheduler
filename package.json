@@ -23,7 +23,6 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "ci": "netlify dev",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
@@ -62,7 +61,6 @@
     "cypress": "^6.8.0",
     "eslint-plugin-prettier": "^3.3.1",
     "netlify-cli": "^3.8.5",
-    "netlify-plugin-cypress": "^2.2.0",
     "postcss": "^7",
     "prettier": "2.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
