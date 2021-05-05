@@ -17,3 +17,11 @@ jobs:
         with:
           build: npm run build
           start: npm start
+  jest-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: yarn test
