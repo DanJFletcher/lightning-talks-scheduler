@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.5",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "@types/lodash": "^4.14.168",
     "@types/netlify-identity-widget": "^1.9.1",
