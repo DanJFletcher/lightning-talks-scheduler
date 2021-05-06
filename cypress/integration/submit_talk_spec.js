@@ -1,5 +1,9 @@
 describe('submit a talk', () => {
-  it('shows success message after submiting a talk successfully', () => {
+  it.only('shows success message after submiting a talk successfully', () => {
+    cy.intercept('.netlify/functions/scheduled-events', {
+      fixture: 'get_scheduled_events_response_200.json',
+    })
+
     cy.visit('/')
 
     window.localStorage.setItem(
@@ -35,6 +39,7 @@ describe('submit a talk', () => {
       statusCode: 204,
     })
 
+    cy.get('select#date').select('Friday, April 30, 2021')
     cy.get('input#name').type('asdf')
     cy.get('input#title').type('asdf')
     cy.get('input#length').type('asdf')

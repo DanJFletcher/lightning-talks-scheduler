@@ -25,9 +25,12 @@
   },
   "scripts": {
     "start": "craco start",
+    "start:dev": "craco -r @cypress/instrument-cra start",
+    "coverage:integration": "yarn start:dev && yarn cypress run",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "NODE_ENV=test BABEL_ENV=test cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -54,12 +57,14 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.5",
+    "@cypress/instrument-cra": "^1.4.0",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "@types/lodash": "^4.14.168",
     "@types/netlify-identity-widget": "^1.9.1",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9",
-    "cypress": "^6.8.0",
+    "cypress": "7.2.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-prettier": "^3.3.1",
     "netlify-cli": "^3.8.5",
