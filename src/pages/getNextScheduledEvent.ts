@@ -9,9 +9,15 @@ const isToday = (date: Date) => {
   //   date.getFullYear() === today.getFullYear()
   // )
 }
+let now = new Date(Date.now())
 
 export const getNextScheduledEvent = (scheduledEvents: ScheduledEvent[]) => {
-  const now = new Date()
+  const noFutureEvents = { date: 'No Future Events', id: 0 }
+
+  if (scheduledEvents.length === 0) {
+    return noFutureEvents
+  }
+
   const MAX_DATE = 8640000000000000
   const anEventWayOutInTheFuture: ScheduledEvent = {
     date: new Date(MAX_DATE).toString(),
@@ -20,15 +26,23 @@ export const getNextScheduledEvent = (scheduledEvents: ScheduledEvent[]) => {
 
   let nextEvent = anEventWayOutInTheFuture
 
-  scheduledEvents.forEach((event) => {
+  scheduledEvents.every((event) => {
     const currentDate = new Date(event.date)
-    console.log(currentDate, currentDate >= now)
+    const nextEventDate = new Date(nextEvent.date)
+
+    if (isNaN(currentDate.getTime())) {
+      nextEvent = noFutureEvents
+      return false
+    }
 
     if (
       (currentDate >= now || isToday(currentDate)) &&
-      currentDate < new Date(nextEvent.date)
+      currentDate < nextEventDate
     ) {
       nextEvent = event
+      return false
+    } else if (currentDate < now) {
+      nextEvent = noFutureEvents
     }
   })
 

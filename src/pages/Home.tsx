@@ -11,6 +11,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { getNextScheduledEvent } from './getNextScheduledEvent'
 
+export const thing = (foo) => `foo ${foo}`
+
 const talks: Talk[] = [
   // {
   //   speaker: 'Andrii Denysenko',
