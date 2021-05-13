@@ -26,11 +26,17 @@
   "scripts": {
     "start": "craco start",
     "start:dev": "craco -r @cypress/instrument-cra start",
-    "coverage:integration": "yarn start:dev && yarn cypress run",
+    "coverage:integration": "start-server-and-test start:dev http-get://localhost:3000 cy:run",
+    "coverage:unit": "craco test --watchAll=false --coverage --coverageDirectory=coverage/unit",
+    "test:coverage": "yarn coverage:integration && yarn coverage:unit && node ./.scripts/mergeReports.js",
     "build": "craco build",
     "test": "craco test",
+    "cy:run": "cypress run",
     "eject": "react-scripts eject",
     "cypress:open": "NODE_ENV=test BABEL_ENV=test cypress open"
+  },
+  "nyc": {
+    "report-dir": "coverage/cypress"
   },
   "eslintConfig": {
     "extends": [
@@ -64,12 +70,14 @@
     "@types/netlify-identity-widget": "^1.9.1",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9",
-    "cypress": "7.2.0",
+    "concurrently": "^6.1.0",
+    "cypress": "7.3.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-prettier": "^3.3.1",
     "netlify-cli": "^3.8.5",
     "postcss": "^7",
     "prettier": "2.2.1",
+    "start-server-and-test": "^1.12.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
