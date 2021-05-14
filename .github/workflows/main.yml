@@ -18,11 +18,15 @@ jobs:
           build: npm run build
           start: npm start
           record: true
+          group: merge
+          tag: ${{ github.event_name }}
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # set the commit message to the pull request title
+          COMMIT_INFO_MESSAGE: ${{ github.event.pull_request.title }}
   jest-run:
     runs-on: ubuntu-latest
     steps:
