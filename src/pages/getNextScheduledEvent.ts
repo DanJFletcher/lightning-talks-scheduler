@@ -1,7 +1,7 @@
 import { ScheduledEvent } from './Home'
 
 const isToday = (date: Date) => {
-  return false
+  return true
   // const today = new Date()
   // return (
   //   date.getDate() === today.getDate() &&
