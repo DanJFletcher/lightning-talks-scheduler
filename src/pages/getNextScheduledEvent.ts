@@ -16,8 +16,12 @@ const isToday = (date: Date) => {
   // )
 }
 
-export const getNextScheduledEvent = (scheduledEvents: ScheduledEvent[]) => {
-  const now = new Date()
+const NO_FUTURE_EVENTS: ScheduledEvent = { date: 'No Future Events', id: 0 }
+
+export const getNextScheduledEvent = (
+  scheduledEvents: ScheduledEvent[],
+  now = new Date(Date.now())
+) => {
   const MAX_DATE = 8640000000000000
   const anEventWayOutInTheFuture: ScheduledEvent = {
     date: new Date(MAX_DATE).toString(),
@@ -28,7 +32,6 @@ export const getNextScheduledEvent = (scheduledEvents: ScheduledEvent[]) => {
 
   scheduledEvents.forEach((event) => {
     const currentDate = new Date(event.date)
-    console.log(currentDate, currentDate >= now)
 
     if (
       (currentDate >= now || isToday(currentDate)) &&
@@ -37,6 +40,10 @@ export const getNextScheduledEvent = (scheduledEvents: ScheduledEvent[]) => {
       nextEvent = event
     }
   })
+
+  if (nextEvent === anEventWayOutInTheFuture) {
+    return NO_FUTURE_EVENTS
+  }
 
   return nextEvent
 }
