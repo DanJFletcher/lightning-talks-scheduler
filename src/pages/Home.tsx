@@ -12,30 +12,30 @@ import 'react-toastify/dist/ReactToastify.css'
 import { getNextScheduledEvent } from './getNextScheduledEvent'
 
 const talks: Talk[] = [
-  // {
-  //   speaker: `Mike King`,
-  //   title: `DRY Mocking in Jest`,
-  //   start: `3:35`,
-  //   end: `3:50`,
-  //   event: 0,
-  //   scheduled: true,
-  // },
-  // {
-  //   speaker: `Andrii Denysenko`,
-  //   title: `Native Notifications in PWAs`,
-  //   start: `3:50`,
-  //   end: `4:05`,
-  //   event: 0,
-  //   scheduled: true,
-  // },
-  // {
-  //   speaker: `Italo Di Renzo`,
-  //   title: `Packaging a Vue TypeScript library`,
-  //   start: '4:05',
-  //   end: '4:20',
-  //   event: 0,
-  //   scheduled: true,
-  // },
+  {
+    speaker: `Sloan`,
+    title: `Zoom Integration for Slack`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: `Deep`,
+    title: `Make Code Look Cool`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: `Sasha`,
+    title: `30 Day Community Team Update`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
   // {
   //   speaker: `Lucas Gladding`,
   //   title: `Creating a Mobtime client SwiftUI`,
