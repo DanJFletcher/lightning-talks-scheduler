@@ -39,7 +39,7 @@ const talks: Talk[] = [
   {
     speaker: `Josh Gaber`,
     title: `Make Your Own Programming Language`,
-    start: `TBD`,
+    start: `TBD`, // Note that this will be 15 minutes long
     end: `TBD`,
     event: 0,
     scheduled: true,
