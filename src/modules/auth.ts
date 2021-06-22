@@ -3,10 +3,10 @@ import netlifyAuth from '../netlifyAuth'
 
 export const login = async (
   authenticator: typeof netlifyAuth,
-  setUser: (user: netlifyIdentity.User) => void,
+  setUser: (user: netlifyIdentity.User | null) => void,
   setLoggedIn: (value: boolean) => void
 ) => {
-  authenticator.authenticate((user: netlifyIdentity.User) => {
+  authenticator.authenticate((user: netlifyIdentity.User | null) => {
     setLoggedIn(!!user)
     setUser(user)
   })

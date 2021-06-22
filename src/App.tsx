@@ -12,7 +12,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated)
 
   useEffect(() => {
-    netlifyAuth.initialize((user: netlifyIdentity.User) => {
+    netlifyAuth.initialize((user: netlifyIdentity.User | null) => {
       setLoggedIn(!!user)
       setUser(user)
     })

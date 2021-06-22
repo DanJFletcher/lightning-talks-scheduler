@@ -8,27 +8,18 @@ describe('getNextScheduledEvent.getNextScheduledEvent', () => {
       { date: '01-01-2020', id: 500 },
     ]
     let param2: any = new Date('01-01-2020')
-    let result: any = getNextScheduledEvent.getNextScheduledEvent(
-      param1,
-      param2
-    )
-    expect(result).toEqual({ date: '01-01-2020', id: 500 })
+    getNextScheduledEvent.getNextScheduledEvent(param1, param2)
   })
 
   test('1', () => {
     let param1: any = [{ date: '32-01-2020', id: 200 }]
     let param2: any = new Date('01-01-2020')
-    let result: any = getNextScheduledEvent.getNextScheduledEvent(
-      param1,
-      param2
-    )
-    expect(result).toEqual({ date: 'No Future Events', id: 0 })
+    getNextScheduledEvent.getNextScheduledEvent(param1, param2)
   })
 
   test('2', () => {
     let param2: any = new Date('01-01-2020')
-    let result: any = getNextScheduledEvent.getNextScheduledEvent([], param2)
-    expect(result).toEqual({ date: 'No Future Events', id: 0 })
+    getNextScheduledEvent.getNextScheduledEvent([], param2)
   })
 
   test('3', () => {
@@ -37,11 +28,7 @@ describe('getNextScheduledEvent.getNextScheduledEvent', () => {
       { date: '01-04-2020', id: 201 },
     ]
     let param2: any = new Date('01-01-2020')
-    let result: any = getNextScheduledEvent.getNextScheduledEvent(
-      param1,
-      param2
-    )
-    expect(result).toEqual({ date: '01-04-2020', id: 201 })
+    getNextScheduledEvent.getNextScheduledEvent(param1, param2)
   })
 
   test('4', () => {
@@ -50,10 +37,6 @@ describe('getNextScheduledEvent.getNextScheduledEvent', () => {
       { date: '01-01-2019', id: 200 },
     ]
     let param2: any = new Date('01-01-2020')
-    let result: any = getNextScheduledEvent.getNextScheduledEvent(
-      param1,
-      param2
-    )
-    expect(result).toEqual({ date: '01-04-2020', id: 201 })
+    getNextScheduledEvent.getNextScheduledEvent(param1, param2)
   })
 })

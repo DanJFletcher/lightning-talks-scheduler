@@ -32,6 +32,7 @@ const netlifyAuth: NetlifyAuth = {
     netlifyIdentity.init()
   },
   authenticate(callback) {
+    console.log('here')
     this.isAuthenticated = true
     netlifyIdentity.open()
     netlifyIdentity.on('login', (user) => {
