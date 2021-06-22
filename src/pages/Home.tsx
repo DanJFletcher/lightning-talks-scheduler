@@ -36,14 +36,14 @@ const talks: Talk[] = [
     event: 0,
     scheduled: true,
   },
-  // {
-  //   speaker: `Lucas Gladding`,
-  //   title: `Creating a Mobtime client SwiftUI`,
-  //   start: `4:20`,
-  //   end: `4:25`,
-  //   event: 0,
-  //   scheduled: true,
-  // },
+  {
+    speaker: `Josh Gaber`,
+    title: `Make Your Own Programming Language`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
   // {
   //   speaker: `Oleksandr Levinskyi`,
   //   title: `Soduku`,
