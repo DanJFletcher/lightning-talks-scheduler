@@ -44,14 +44,14 @@ const talks: Talk[] = [
     event: 0,
     scheduled: true,
   },
-  // {
-  //   speaker: `Oleksandr Levinskyi`,
-  //   title: `Soduku`,
-  //   start: `4:25`,
-  //   end: `4:45`,
-  //   event: 0,
-  //   scheduled: true,
-  // },
+  {
+    speaker: `Alex`,
+    title: `Declarativas Primer`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
   // {
   //   speaker: `Deep`,
   //   title: `Free code for frontend`,
