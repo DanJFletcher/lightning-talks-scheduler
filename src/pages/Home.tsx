@@ -53,8 +53,8 @@ const talks: Talk[] = [
     scheduled: true,
   },
   {
-    speaker: `Dan Fletcher`,
-    title: `AI Generated Unit Tests With Ponicode`,
+    speaker: `Mike King`,
+    title: `React Route Manager - Status Update`,
     start: `TBD`,
     end: `TBD`,
     event: 0,
