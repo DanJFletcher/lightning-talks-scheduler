@@ -52,14 +52,14 @@ const talks: Talk[] = [
     event: 0,
     scheduled: true,
   },
-  // {
-  //   speaker: `Deep`,
-  //   title: `Free code for frontend`,
-  //   start: `4:45`,
-  //   end: `4:55`,
-  //   event: 0,
-  //   scheduled: true,
-  // },
+  {
+    speaker: `Dan Fletcher`,
+    title: `AI Generated Unit Tests With Ponicode`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
 ]
 
 interface HomeProps {
