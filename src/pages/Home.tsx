@@ -14,7 +14,7 @@ import { getNextScheduledEvent } from './getNextScheduledEvent'
 const talks: Talk[] = [
   {
     speaker: `Jake Klassen`,
-    title: `Zoom Integration for Slack`,
+    title: `Typescript Thingies`,
     start: `3:35`,
     end: `3:40`,
     event: 0,
