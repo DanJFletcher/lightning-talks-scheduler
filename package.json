@@ -26,6 +26,8 @@
   "scripts": {
     "start": "craco start",
     "start:dev": "craco -r @cypress/instrument-cra start",
+    "start:ci": "cross-env NODE_ENV=test concurrently yarn:start:react:proxy-server",
+    "start:react:proxy-server": "node scripts/testServer.js",
     "coverage:integration": "start-server-and-test start:dev http-get://localhost:3000 cy:run",
     "coverage:unit": "craco test --watchAll=false --coverage --coverageDirectory=coverage/unit",
     "test:coverage": "yarn coverage:integration && yarn coverage:unit && node ./.scripts/mergeReports.js",

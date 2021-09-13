@@ -31,16 +31,14 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-
-      - name: fuck
-        run: ls
+          build: yarn build
 
       - name: Save build folder
         uses: actions/upload-artifact@v2
         with:
-          name: node_modules
+          name: build
           if-no-files-found: error
-          path: node_modules
+          path: build
   cypress-run:
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
@@ -69,15 +67,15 @@ jobs:
       - name: Download the build folders
         uses: actions/download-artifact@v2
         with:
-          name: node_modules
-          path: node_modules
+          name: build
+          path: build
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           install: false
-          start: yarn start
+          start: yarn start:ci
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
           record: true
