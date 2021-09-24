@@ -29,14 +29,6 @@ const talks: Talk[] = [
     scheduled: true,
   },
   {
-    speaker: `Andrii Denysenko`,
-    title: `Building apps with Flutter BLoC by BLoC`,
-    start: `3:40`,
-    end: `3:55`,
-    event: 0,
-    scheduled: true,
-  },
-  {
     speaker: `Rich`,
     title: `Figuring out my content`,
     start: `3:55`,
