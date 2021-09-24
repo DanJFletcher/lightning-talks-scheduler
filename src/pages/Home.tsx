@@ -11,56 +11,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { getNextScheduledEvent } from './getNextScheduledEvent'
 
-const talks: Talk[] = [
-  {
-    speaker: `Benjamin Henry`,
-    title: `Community Team September Updates!`,
-    start: `3:35`,
-    end: `3:40`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Andrii Denysenko`,
-    title: `Building apps with Flutter BLoC by BLoC`,
-    start: `3:40`,
-    end: `3:55`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Rich`,
-    title: `Figuring out my content`,
-    start: `3:55`,
-    end: `4:05`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Felipe`,
-    title: `Demystifying remote listening debug`,
-    start: `4:05`,
-    end: `4:15`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Joh Ith`,
-    title: `Your Advice Monster`,
-    start: `4:15`,
-    end: `4:30`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Colin DeCarlo`,
-    title: `What's New in PHP 8.1`,
-    start: `4:30`,
-    end: `Whenever He Stops Talking`,
-    event: 0,
-    scheduled: true,
-  },
-]
+const talks: Talk[] = []
 
 interface HomeProps {
   loggedIn: boolean
