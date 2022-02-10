@@ -15,40 +15,40 @@ const talks: Talk[] = [
   {
     speaker: `Avraham`,
     title: `Better diffs in command line Git`,
-    start: `TBD`,
-    end: `TBD`,
+    // start: `TBD`,
+    // end: `TBD`,
     event: 0,
     scheduled: true,
   },
   {
     speaker: `Jevin`,
     title: `NixOS to Declaratively Setup Your OS`,
-    start: `TBD`,
-    end: `TBD`,
+    // start: `TBD`,
+    // end: `TBD`,
     event: 0,
     scheduled: true,
   },
   {
     speaker: `Also, Jevin`,
     title: `Jevin's Homelab`,
-    start: `TBD`,
-    end: `TBD`,
+    // start: `TBD`,
+    // end: `TBD`,
     event: 0,
     scheduled: true,
   },
   {
     speaker: `Chris Saunders`,
     title: `Excel: Like Actually Kinda Cool`,
-    start: `TBD`,
-    end: `TBD`,
+    // start: `TBD`,
+    // end: `TBD`,
     event: 0,
     scheduled: true,
   },
   {
     speaker: `Dan Fletcher`,
     title: `Code Review Tips for GH and VS Code`,
-    start: `TBD`,
-    end: `TBD`,
+    // start: `TBD`,
+    // end: `TBD`,
     event: 0,
     scheduled: true,
   },
@@ -187,13 +187,15 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
 
         <h3 className="text-2xl mt-6">Scheduled Talks</h3>
 
-        <div className="flex justify-center mt-6 flex-wrap">
+        <div className="flex justify-center mt-6 flex-wrap ">
           {talks.length > 0 ? (
             talks.map((talk) => (
               <div className="bg-white m-2 p-4 shadow-md w-44">
-                <div className="mt-4 mb-4 font-bold">
-                  {talk.start} - {talk.end}
-                </div>
+                {talk.start ? (
+                  <div className="mt-4 mb-4 font-bold">
+                    {talk.start} - {talk.end}
+                  </div>
+                ) : null}
                 <h4 className="text-2xl mb-4">{talk.speaker}</h4>
                 <div className="">{talk.title}</div>
               </div>

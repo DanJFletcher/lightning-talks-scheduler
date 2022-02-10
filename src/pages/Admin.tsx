@@ -5,8 +5,8 @@ import Form from '../components/forms/Form'
 export interface Talk {
   speaker: string
   title: string
-  start: string
-  end: string
+  start?: string
+  end?: string
   scheduled: boolean
   event: number
 }
