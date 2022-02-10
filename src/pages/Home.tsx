@@ -11,7 +11,48 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { getNextScheduledEvent } from './getNextScheduledEvent'
 
-const talks: Talk[] = []
+const talks: Talk[] = [
+  {
+    speaker: `Avraham`,
+    title: `Better diffs in command line Git`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: `Jevin`,
+    title: `NixOS to Declaratively Setup Your OS`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: `Also, Jevin`,
+    title: `Jevin's Homelab`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: `Chris Saunders`,
+    title: `Excel: Like Actually Kinda Cool`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+  {
+    speaker: `Dan Fletcher`,
+    title: `Code Review Tips for GH and VS Code`,
+    start: `TBD`,
+    end: `TBD`,
+    event: 0,
+    scheduled: true,
+  },
+]
 
 interface HomeProps {
   loggedIn: boolean
@@ -70,6 +111,9 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
     ;(async () => {
       const response = await fetch('.netlify/functions/scheduled-events')
       const data: ScheduledEventResponse[] = await response.json()
+      if (!data.length) {
+        return
+      }
       setAvailableDates(
         data.map((x) => ({
           date: new Date(x.data.date).toLocaleDateString('en-US', {
@@ -135,7 +179,7 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
           ) : null}
         </>
       ) : null}
-      <h1 className="text-6xl font-extrabold">Vehikl Lightning Talks</h1>
+      <h1 className="text-6xl font-extrabold">Humi Lightning Talks</h1>
       <div className="text-6xl mt-4">⚡</div>
       <section className="mt-4">
         <h2 className="text-4xl mt-14">Next Event</h2>
@@ -216,8 +260,8 @@ const Home: React.FC<HomeProps> = ({ loggedIn, user, logout, login }) => {
       <footer className="bg-white w-full py-8 px-4">
         <p>
           Created with ❤ at{' '}
-          <a href="//vehikl.com" className="underline">
-            Vehikl
+          <a href="//humi.ca" className="underline">
+            Humi
           </a>
         </p>
         <p>
