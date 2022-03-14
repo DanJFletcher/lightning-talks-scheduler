@@ -11,48 +11,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { getNextScheduledEvent } from './getNextScheduledEvent'
 
-const talks: Talk[] = [
-  {
-    speaker: `Avraham`,
-    title: `Better diffs in command line Git`,
-    // start: `TBD`,
-    // end: `TBD`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Jevin`,
-    title: `NixOS to Declaratively Setup Your OS`,
-    // start: `TBD`,
-    // end: `TBD`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Also, Jevin`,
-    title: `Jevin's Homelab`,
-    // start: `TBD`,
-    // end: `TBD`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Chris Saunders`,
-    title: `Excel: Like Actually Kinda Cool`,
-    // start: `TBD`,
-    // end: `TBD`,
-    event: 0,
-    scheduled: true,
-  },
-  {
-    speaker: `Dan Fletcher`,
-    title: `Code Review Tips for GH and VS Code`,
-    // start: `TBD`,
-    // end: `TBD`,
-    event: 0,
-    scheduled: true,
-  },
-]
+const talks: Talk[] = []
 
 interface HomeProps {
   loggedIn: boolean
