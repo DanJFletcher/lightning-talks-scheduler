@@ -4,7 +4,7 @@ import './App.css'
 import netlifyIdentity from 'netlify-identity-widget'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Admin from './pages/Admin'
-import Home from './pages/Home'
+import Home from './pages/home/Home'
 import { login as authLogin } from './modules/auth'
 
 function App() {
